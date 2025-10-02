@@ -31,5 +31,8 @@
   "volta": {
     "node": "22.20.0",
     "yarn": "4.10.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/errolkeith"
   }
 }
