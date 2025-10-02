@@ -13,8 +13,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install deps
         run: yarn --immutable
-      - name: build
+      - name: Build
         run: yarn build
+        run: echo "$(cat .npmrc)"
       - name: 'Publish'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
