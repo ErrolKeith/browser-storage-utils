@@ -16,6 +16,9 @@ jobs:
       - name: Install deps
         run: yarn --immutable
       - run: yarn build
-      - run: npm publish
+      - name: 'Auth for npm'
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: 'Publish'
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
