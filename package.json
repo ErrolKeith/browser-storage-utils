@@ -1,4 +1,23 @@
 {
-  "name": "local-storage-utils",
-  "packageManager": "yarn@4.7.0"
+  "name": "browser-storage-utils",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "yarn test:unit",
+    "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^27",
+    "jsdom": "^27.0.0",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "yarn@4.10.3",
+  "volta": {
+    "node": "22.20.0",
+    "yarn": "4.10.3"
+  }
 }
