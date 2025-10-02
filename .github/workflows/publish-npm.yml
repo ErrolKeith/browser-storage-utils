@@ -1,0 +1,22 @@
+name: Publish Package to `npm`
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies with Yarn
+        run: yarn install --frozen-lockfile
+      - name: Publish to npm
+        run: yarn publish --access public
