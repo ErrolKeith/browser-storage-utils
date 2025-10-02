@@ -1,5 +1,17 @@
 {
   "name": "browser-storage-utils",
+  "version": "beta-0.0.1",
+  "description": "A collection of utility functions for managing browser storage options like localStorage, sessionStorage, and cookies.",
+  "author": "Errol Keith",
+  "keywords": [
+    "browser",
+    "storage",
+    "localStorage",
+    "sessionStorage",
+    "cookie",
+    "utils",
+    "utilities"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
