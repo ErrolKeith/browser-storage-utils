@@ -1,1 +1,1 @@
-# local-storage-utils
+# browser-storage-utils
