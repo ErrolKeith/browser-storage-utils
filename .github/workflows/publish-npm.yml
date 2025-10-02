@@ -15,7 +15,7 @@ jobs:
         run: yarn --immutable
       - name: Build
         run: yarn build
-        run: echo "$(cat .npmrc)"
+      - run: echo "$(cat .npmrc)"
       - name: 'Publish'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
