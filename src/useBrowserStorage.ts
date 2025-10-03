@@ -31,6 +31,7 @@ export function useBrowserStorage(
   storageConfiguration: BrowserStorageConfiguration
 ) {
   try {
+    // TODO: This should be safeParse with better error reporting, and would remove the try/catch
     const validConfig = browserStorageConfigSchema.parse(storageConfiguration);
     const { type, keyPrefix } = validConfig;
 
