@@ -12,7 +12,6 @@ import {
 } from "./lib/session-storage/operations";
 import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
 import { browserStorageConfigSchema } from "./lib/configuration/schema";
-import { ca } from "zod/v4/locales";
 
 /**
  *
