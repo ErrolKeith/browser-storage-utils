@@ -20,13 +20,19 @@ interface BrowserStorage {
 }
 
 /**
- * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage, and cookies.
+ * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage,
+ * and cookies.
  * 
  * @param storageConfiguration {@link BrowserStorageConfiguration}
  * @returns functions to get, set, and remove items from the specified storage mechanism.
  * @throws Will throw an error if the provided configuration is invalid.
  * @example
- * const { getItem, setItem, removeItem, setItemIfNotSet } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+ * const {
+ *  getItem,
+ *  setItem,
+ *  removeItem,
+ *  setItemIfNotSet
+ * } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
  *
  * const user = "user123";
  * setItem("username", user);
