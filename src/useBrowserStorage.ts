@@ -12,11 +12,19 @@ import {
 import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
 import { browserStorageConfigSchema, type BrowserStorageConfiguration } from "./lib/configuration/schema";
 
+interface BrowserStorage {
+  getItem: (key: string) => string | undefined;
+  removeItem: (key: string) => void;
+  setItem: (key: string, value: string) => void;
+  setItemIfNotSet: (key: string, value: string) => void;
+}
+
 /**
  * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage, and cookies.
  * 
  * @param storageConfiguration {@link BrowserStorageConfiguration}
- * @returns
+ * @returns functions to get, set, and remove items from the specified storage mechanism.
+ * @throws Will throw an error if the provided configuration is invalid.
  * @example
  * const { getItem, setItem, removeItem, setItemIfNotSet } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
  *
@@ -28,7 +36,7 @@ import { browserStorageConfigSchema, type BrowserStorageConfiguration } from "./
  */
 export function useBrowserStorage(
   storageConfiguration: BrowserStorageConfiguration
-) {
+): BrowserStorage | void {
   try {
     // TODO: This should be safeParse with better error reporting, and would remove the try/catch
     const validConfig = browserStorageConfigSchema.parse(storageConfiguration);
