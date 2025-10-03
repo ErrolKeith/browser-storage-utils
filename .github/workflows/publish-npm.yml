@@ -1,0 +1,23 @@
+name: Publish Package to `npm` with `yarn`.
+on:
+  workflow_dispatch:
+env:
+  # The repositories .yarnrc.yml file will use this token to authenticate the publish command
+  # and MUST be present in the repository root. It also expects npmPublishAccess to be set.
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install deps
+        run: yarn --immutable
+      - name: Build
+        run: yarn build
+      - name: 'Publish'
+        run: yarn npm publish
