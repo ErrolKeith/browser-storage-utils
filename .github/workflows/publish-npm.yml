@@ -1,7 +1,9 @@
-name: Publish Package to `npm`
+name: Publish Package to `npm` with `yarn`.
 on:
-  push:
+  workflow_dispatch:
 env:
+  # The repositories .yarnrc.yml file will use this token to authenticate the publish command
+  # and MUST be present in the repository root. It also expects npmPublishAccess to be set.
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 jobs:
   build:
