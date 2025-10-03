@@ -9,15 +9,15 @@ jobs:
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
-          registry-url: "https://registry.npmjs.org"
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install deps
         run: yarn --immutable
       - name: Build
         run: yarn build
       - name: Create `.npmrc`
         run: echo '//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN  }}' > .npmrc
-      - name: "Publish"
+      - name: 'Publish'
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn npm publish --access public
