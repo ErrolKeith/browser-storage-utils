@@ -13,7 +13,8 @@ import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
 import { browserStorageConfigSchema, type BrowserStorageConfiguration } from "./lib/configuration/schema";
 
 /**
- *
+ * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage, and cookies.
+ * 
  * @param storageConfiguration {@link BrowserStorageConfiguration}
  * @returns
  * @example
