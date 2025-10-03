@@ -22,13 +22,20 @@ const browserStorageConfigSchema = z.discriminatedUnion("type", [
   cookieConfigSchema,
 ]);
 
+type BrowserStorageConfiguration = z.infer<typeof browserStorageConfigSchema>;
+type LocalStorageConfiguration = z.infer<typeof localStorageConfigSchema>;
+type SessionStorageConfiguration = z.infer<typeof sessionStorageConfigSchema>;
+type CookiesConfiguration = z.infer<typeof cookieConfigSchema>;
+
 export {
   browserStorageConfigSchema,
   localStorageConfigSchema,
   sessionStorageConfigSchema,
   cookieConfigSchema,
 };
-export type BrowserStorageConfig = z.infer<typeof browserStorageConfigSchema>;
-export type LocalStorageConfig = z.infer<typeof localStorageConfigSchema>;
-export type SessionStorageConfig = z.infer<typeof sessionStorageConfigSchema>;
-export type CookiesConfig = z.infer<typeof cookieConfigSchema>;
+export type {
+  BrowserStorageConfiguration,
+  LocalStorageConfiguration,
+  SessionStorageConfiguration,
+  CookiesConfiguration,
+};

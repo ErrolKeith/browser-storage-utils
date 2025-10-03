@@ -1,5 +1,4 @@
 import { makeOptionallyPrefixedKey } from "./lib/storage-key/key";
-import type { BrowserStorageConfiguration } from "./types";
 import {
   getLocalStorageItem,
   setLocalStorageItem,
@@ -11,7 +10,7 @@ import {
   removeSessionStorageItem,
 } from "./lib/session-storage/operations";
 import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
-import { browserStorageConfigSchema } from "./lib/configuration/schema";
+import { browserStorageConfigSchema, type BrowserStorageConfiguration } from "./lib/configuration/schema";
 
 /**
  *
