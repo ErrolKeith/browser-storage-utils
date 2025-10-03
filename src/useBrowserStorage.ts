@@ -11,6 +11,7 @@ import {
   removeSessionStorageItem,
 } from "./lib/session-storage/operations";
 import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
+import { browserStorageConfigSchema } from "./lib/configuration/schema";
 
 /**
  *
@@ -28,8 +29,8 @@ import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
 export function useBrowserStorage(
   storageConfiguration: BrowserStorageConfiguration
 ) {
-  // TODO: validate config for runtime coverage.
-  const { type, keyPrefix } = storageConfiguration;
+  const validConfig = browserStorageConfigSchema.parse(storageConfiguration);
+  const { type, keyPrefix } = validConfig;
 
   /**
    * Used to set a storage value.
@@ -50,7 +51,7 @@ export function useBrowserStorage(
         setSessionStorageItem(storageKey, value);
         break;
       case "cookies":
-        const { expiryDays } = storageConfiguration;
+        const { expiryDays } = validConfig;
 
         setCookie(storageKey, value, expiryDays);
 
