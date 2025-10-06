@@ -75,9 +75,9 @@ export function useBrowserStorage(
         setSessionStorageItem(storageKey, value);
         break;
       case "cookies":
-        const { cookieOptions } = validConfig.data;
+        const { options } = validConfig.data;
 
-        setCookie(storageKey, value, cookieOptions);
+        setCookie(storageKey, value, options);
 
         document.cookie = `${storageKey}=${value}; path=/`;
         break;

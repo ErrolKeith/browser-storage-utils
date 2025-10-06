@@ -15,7 +15,7 @@ const cookieOptionsSchema = z.object({ expires: z.number().optional() });
 const cookieConfigSchema = z.object({
   type: z.literal("cookies"),
   keyPrefix: z.string().optional(),
-  cookieOptions: cookieOptionsSchema.optional(),
+  options: cookieOptionsSchema.optional(),
 });
 
 const browserStorageConfigSchema = z.discriminatedUnion("type", [
