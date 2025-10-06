@@ -134,7 +134,7 @@ export function useBrowserStorage(
           removeSessionStorageItem(storageKey);
           break;
         case "cookies":
-          removeCookie();
+          removeCookie(storageKey);
           break;
       }
     };
