@@ -3,7 +3,7 @@
  * @param key 
  * @param value 
  */
-const setSessionStorageItem = (key: string, value: string) => {
+export const setSessionStorageItem = (key: string, value: string) => {
   window.sessionStorage.setItem(key, value);
 }
 
@@ -12,7 +12,7 @@ const setSessionStorageItem = (key: string, value: string) => {
  * @param key 
  * @returns 
  */
-const getSessionStorageItem = (key: string): string | undefined => {
+export const getSessionStorageItem = (key: string): string | undefined => {
   return window.sessionStorage.getItem(key) ?? undefined;
 }
 
@@ -20,8 +20,6 @@ const getSessionStorageItem = (key: string): string | undefined => {
  * Removes an item from session storage
  * @param key 
  */
-const removeSessionStorageItem = (key: string) => {
+export const removeSessionStorageItem = (key: string) => {
   window.sessionStorage.removeItem(key);
 }
-
-export { setSessionStorageItem, getSessionStorageItem, removeSessionStorageItem };

@@ -14,13 +14,7 @@ import {
   browserStorageConfigSchema,
   type BrowserStorageConfiguration,
 } from "./lib/configuration/schema";
-
-export interface BrowserStorage {
-  getItem: (key: string) => string | undefined;
-  removeItem: (key: string) => void;
-  setItem: (key: string, value: string) => void;
-  setItemIfNotSet: (key: string, value: string) => void;
-}
+import type { BrowserStorage } from "./types";
 
 /**
  * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage,
@@ -35,7 +29,7 @@ export interface BrowserStorage {
  *  setItem,
  *  removeItem,
  *  setItemIfNotSet
- * } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+ * } = useBrowserStorage({ type: "local-storage", options: { keyPrefix: "myApp" } });
  *
  * const user = "user123";
  * setItem("username", user);
@@ -60,7 +54,7 @@ export function useBrowserStorage(
    * @param key
    * @param value
    * @example
-   * const { setItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   * const { setItem } = useBrowserStorage({ type: "local-storage", options: { keyPrefix: "myApp" } });
    *
    * setItem("username", "john_doe");
    */
@@ -89,7 +83,7 @@ export function useBrowserStorage(
    * @param key
    * @param value
    * @example
-   * const { setItemIfNotSet } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   * const { setItemIfNotSet } = useBrowserStorage({ type: "local-storage", options: { keyPrefix: "myApp" } });
    *
    * setItemIfNotSet("username", "john_doe"); // Only sets if "username" is not already set
    */
@@ -106,7 +100,7 @@ export function useBrowserStorage(
    * @param key
    * @returns
    * @example
-   * const { getItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   * const { getItem } = useBrowserStorage({ type: "local-storage", options: { keyPrefix: "myApp" } });
    *
    * const username = getItem("username");
    */
@@ -128,7 +122,7 @@ export function useBrowserStorage(
    *
    * @param key
    * @example
-   * const { removeItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   * const { removeItem } = useBrowserStorage({ type: "local-storage", options: { keyPrefix: "myApp" } });
    *
    * removeItem("username"); // Removes the item associated with "myApp_username" from localStorage
    */

@@ -1,5 +1,6 @@
 import { useBrowserStorage } from "./useBrowserStorage";
-import type { BrowserStorage } from "./useBrowserStorage";
+import { makeOptionallyPrefixedKey } from "./lib/storage-key/key";
+import type { BrowserStorage } from "./types";
 
-export { useBrowserStorage };
+export { makeOptionallyPrefixedKey, useBrowserStorage };
 export type { BrowserStorage };
