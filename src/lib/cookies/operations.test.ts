@@ -6,7 +6,7 @@ it("can set, get, and remove a cookie", () => {
   const value = "testValue";
 
   // Set the cookie
-  setCookie(key, value, 1); // Expires in 1 day
+  setCookie(key, value, { expires: 1 }); // Expires in 1 day
 
   // Get the cookie
   const retrievedValue = getCookie(key);

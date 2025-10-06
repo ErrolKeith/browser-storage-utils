@@ -56,7 +56,7 @@ it("can validate cookies config", () => {
   const validCookiesConfig = {
     type: "cookies",
     keyPrefix: "myApp",
-    expiryDays: 7,
+    cookieOptions: { expires: 7 },
   };
 
   expect(() =>
