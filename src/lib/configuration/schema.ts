@@ -10,10 +10,12 @@ const sessionStorageConfigSchema = z.object({
   keyPrefix: z.string().optional(),
 });
 
+const cookieOptionsSchema = z.object({ expires: z.number().optional() });
+
 const cookieConfigSchema = z.object({
   type: z.literal("cookies"),
   keyPrefix: z.string().optional(),
-  expiryDays: z.number().optional(),
+  cookieOptions: cookieOptionsSchema.optional(),
 });
 
 const browserStorageConfigSchema = z.discriminatedUnion("type", [

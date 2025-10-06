@@ -20,10 +20,12 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
+    "js-cookie": "^3.0.5",
     "typescript": "^5.9.2",
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3",
     "@types/jsdom": "^27",
     "jsdom": "^27.0.0",
     "vitest": "^3.2.4"

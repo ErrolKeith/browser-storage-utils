@@ -10,7 +10,10 @@ import {
   removeSessionStorageItem,
 } from "./lib/session-storage/operations";
 import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
-import { browserStorageConfigSchema, type BrowserStorageConfiguration } from "./lib/configuration/schema";
+import {
+  browserStorageConfigSchema,
+  type BrowserStorageConfiguration,
+} from "./lib/configuration/schema";
 
 export interface BrowserStorage {
   getItem: (key: string) => string | undefined;
@@ -22,7 +25,7 @@ export interface BrowserStorage {
 /**
  * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage,
  * and cookies.
- * 
+ *
  * @param storageConfiguration {@link BrowserStorageConfiguration}
  * @returns functions to get, set, and remove items from the specified storage mechanism.
  * @throws Will throw an error if the provided configuration is invalid.
@@ -59,6 +62,7 @@ export function useBrowserStorage(
      */
     const setItem = (key: string, value: string) => {
       const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+
       switch (type) {
         case "local-storage":
           setLocalStorageItem(storageKey, value);
@@ -67,9 +71,9 @@ export function useBrowserStorage(
           setSessionStorageItem(storageKey, value);
           break;
         case "cookies":
-          const { expiryDays } = validConfig;
+          const { cookieOptions } = validConfig;
 
-          setCookie(storageKey, value, expiryDays);
+          setCookie(storageKey, value, cookieOptions);
 
           document.cookie = `${storageKey}=${value}; path=/`;
           break;
@@ -134,7 +138,7 @@ export function useBrowserStorage(
           removeSessionStorageItem(storageKey);
           break;
         case "cookies":
-          removeCookie();
+          removeCookie(storageKey);
           break;
       }
     };
