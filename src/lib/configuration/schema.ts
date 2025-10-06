@@ -1,21 +1,27 @@
 import { z } from "zod";
 
+const baseStorageOptionsSchema = z.object({
+  keyPrefix: z.string().optional(),
+});
+
+const localStorageOptionsSchema = baseStorageOptionsSchema.optional();
 const localStorageConfigSchema = z.object({
   type: z.literal("local-storage"),
-  keyPrefix: z.string().optional(),
+  options: localStorageOptionsSchema,
 });
 
+const sessionStorageOptionsSchema = baseStorageOptionsSchema.optional();
 const sessionStorageConfigSchema = z.object({
   type: z.literal("session-storage"),
-  keyPrefix: z.string().optional(),
+  options: sessionStorageOptionsSchema,
 });
 
-const cookieOptionsSchema = z.object({ expires: z.number().optional() });
-
+const cookieStorageOptionsSchema = baseStorageOptionsSchema.extend({
+  expires: z.number().optional(),
+});
 const cookieConfigSchema = z.object({
   type: z.literal("cookies"),
-  keyPrefix: z.string().optional(),
-  options: cookieOptionsSchema.optional(),
+  options: cookieStorageOptionsSchema.optional(),
 });
 
 const browserStorageConfigSchema = z.discriminatedUnion("type", [
@@ -24,20 +30,24 @@ const browserStorageConfigSchema = z.discriminatedUnion("type", [
   cookieConfigSchema,
 ]);
 
-type BrowserStorageConfiguration = z.infer<typeof browserStorageConfigSchema>;
-type LocalStorageConfiguration = z.infer<typeof localStorageConfigSchema>;
-type SessionStorageConfiguration = z.infer<typeof sessionStorageConfigSchema>;
-type CookiesConfiguration = z.infer<typeof cookieConfigSchema>;
+export type BaseStorageOptions = z.infer<typeof baseStorageOptionsSchema>;
+export type BrowserStorageConfiguration = z.infer<
+  typeof browserStorageConfigSchema
+>;
+export type LocalStorageOptions = z.infer<typeof localStorageOptionsSchema>;
+export type LocalStorageConfiguration = z.infer<
+  typeof localStorageConfigSchema
+>;
+export type SessionStorageOptions = z.infer<typeof sessionStorageOptionsSchema>;
+export type SessionStorageConfiguration = z.infer<
+  typeof sessionStorageConfigSchema
+>;
+export type CookieStorageOptions = z.infer<typeof cookieStorageOptionsSchema>;
+export type CookiesConfiguration = z.infer<typeof cookieConfigSchema>;
 
 export {
   browserStorageConfigSchema,
   localStorageConfigSchema,
   sessionStorageConfigSchema,
   cookieConfigSchema,
-};
-export type {
-  BrowserStorageConfiguration,
-  LocalStorageConfiguration,
-  SessionStorageConfiguration,
-  CookiesConfiguration,
 };

@@ -6,7 +6,9 @@ const key = "testItem";
 it("can use browser `local-storage`", () => {
   const storage = useBrowserStorage({
     type: "local-storage",
-    keyPrefix: "testPrefix",
+    options: {
+      keyPrefix: "testPrefix",
+    },
   });
 
   if (!storage) {
@@ -28,7 +30,9 @@ it("can use browser `local-storage`", () => {
 it("can use browser `session-storage`", () => {
   const storage = useBrowserStorage({
     type: "session-storage",
-    keyPrefix: "testPrefix",
+    options: {
+      keyPrefix: "testPrefix",
+    },
   });
 
   if (!storage) {
@@ -50,7 +54,10 @@ it("can use browser `session-storage`", () => {
 it("can use browser `cookies`", () => {
   const storage = useBrowserStorage({
     type: "cookies",
-    keyPrefix: "testPrefix",
+    options: {
+      keyPrefix: "testPrefix",
+      expires: 1,
+    },
   });
 
   if (!storage) {

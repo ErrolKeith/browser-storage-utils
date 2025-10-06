@@ -53,7 +53,7 @@ export function useBrowserStorage(
     return undefined;
   }
 
-  const { type, keyPrefix } = validConfig.data;
+  const { type, options } = validConfig.data;
 
   /**
    * Used to set a storage value.
@@ -65,7 +65,7 @@ export function useBrowserStorage(
    * setItem("username", "john_doe");
    */
   const setItem = (key: string, value: string) => {
-    const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+    const storageKey = makeOptionallyPrefixedKey(key, options?.keyPrefix);
 
     switch (type) {
       case "local-storage":
@@ -111,7 +111,7 @@ export function useBrowserStorage(
    * const username = getItem("username");
    */
   const getItem = (key: string): string | undefined => {
-    const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+    const storageKey = makeOptionallyPrefixedKey(key, options?.keyPrefix);
     switch (type) {
       case "local-storage":
         return getLocalStorageItem(storageKey) ?? undefined;
@@ -133,7 +133,7 @@ export function useBrowserStorage(
    * removeItem("username"); // Removes the item associated with "myApp_username" from localStorage
    */
   const removeItem = (key: string) => {
-    const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+    const storageKey = makeOptionallyPrefixedKey(key, options?.keyPrefix);
     switch (type) {
       case "local-storage":
         removeLocalStorageItem(storageKey);
