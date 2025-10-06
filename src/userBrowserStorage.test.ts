@@ -8,6 +8,7 @@ it("can use browser `local-storage`", () => {
   });
 
   if (!storage) {
+    // TODO: need to fail the test if storage is undefined
     return;
   }
 
@@ -30,6 +31,7 @@ it("can use browser `session-storage`", () => {
   });
 
   if (!storage) {
+    // TODO: need to fail the test if storage is undefined
     return;
   }
 
@@ -52,6 +54,7 @@ it("can use browser `cookies`", () => {
   });
 
   if (!storage) {
+    // TODO: need to fail the test if storage is undefined
     return;
   }
 
