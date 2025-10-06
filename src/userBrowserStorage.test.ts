@@ -1,6 +1,8 @@
 import { it, expect } from "vitest";
 import { useBrowserStorage } from "./useBrowserStorage";
 
+const key = "testItem";
+
 it("can use browser `local-storage`", () => {
   const storage = useBrowserStorage({
     type: "local-storage",
@@ -12,7 +14,6 @@ it("can use browser `local-storage`", () => {
     return;
   }
 
-  const key = "testItem";
   const { setItem, getItem, removeItem } = storage;
 
   expect(getItem(key)).toBeUndefined();
@@ -35,7 +36,6 @@ it("can use browser `session-storage`", () => {
     return;
   }
 
-  const key = "testItem";
   const { setItem, getItem, removeItem } = storage;
 
   expect(getItem(key)).toBeUndefined();
@@ -58,7 +58,6 @@ it("can use browser `cookies`", () => {
     return;
   }
 
-  const key = "testItem";
   const { setItem, getItem, removeItem } = storage;
 
   expect(getItem(key)).toBeUndefined();
