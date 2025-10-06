@@ -45,106 +45,107 @@ export interface BrowserStorage {
  */
 export function useBrowserStorage(
   storageConfiguration: BrowserStorageConfiguration
-): BrowserStorage | void {
-  try {
-    // TODO: This should be safeParse with better error reporting, and would remove the try/catch
-    const validConfig = browserStorageConfigSchema.parse(storageConfiguration);
-    const { type, keyPrefix } = validConfig;
+): BrowserStorage | undefined {
+  const validConfig =
+    browserStorageConfigSchema.safeParse(storageConfiguration);
 
-    /**
-     * Used to set a storage value.
-     * @param key
-     * @param value
-     * @example
-     * const { setItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
-     *
-     * setItem("username", "john_doe");
-     */
-    const setItem = (key: string, value: string) => {
-      const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
-
-      switch (type) {
-        case "local-storage":
-          setLocalStorageItem(storageKey, value);
-          break;
-        case "session-storage":
-          setSessionStorageItem(storageKey, value);
-          break;
-        case "cookies":
-          const { cookieOptions } = validConfig;
-
-          setCookie(storageKey, value, cookieOptions);
-
-          document.cookie = `${storageKey}=${value}; path=/`;
-          break;
-      }
-    };
-
-    /**
-     * Used to set a value only if it does not already exist.
-     * @param key
-     * @param value
-     * @example
-     * const { setItemIfNotSet } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
-     *
-     * setItemIfNotSet("username", "john_doe"); // Only sets if "username" is not already set
-     */
-    const setItemIfNotSet = (key: string, value: string) => {
-      const existingValue = getItem(key);
-
-      if (existingValue === undefined) {
-        setItem(key, value);
-      }
-    };
-
-    /**
-     *
-     * @param key
-     * @returns
-     * @example
-     * const { getItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
-     *
-     * const username = getItem("username");
-     */
-    const getItem = (key: string): string | undefined => {
-      const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
-      switch (type) {
-        case "local-storage":
-          return getLocalStorageItem(storageKey) ?? undefined;
-        case "session-storage":
-          return getSessionStorageItem(storageKey);
-        case "cookies":
-          return getCookie(storageKey);
-        default:
-          return undefined;
-      }
-    };
-
-    /**
-     *
-     * @param key
-     * @example
-     * const { removeItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
-     *
-     * removeItem("username"); // Removes the item associated with "myApp_username" from localStorage
-     */
-    const removeItem = (key: string) => {
-      const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
-      switch (type) {
-        case "local-storage":
-          removeLocalStorageItem(storageKey);
-          break;
-        case "session-storage":
-          removeSessionStorageItem(storageKey);
-          break;
-        case "cookies":
-          removeCookie(storageKey);
-          break;
-      }
-    };
-
-    return { getItem, removeItem, setItem, setItemIfNotSet };
-  } catch (e) {
-    console.error("browser-storage-utils-error", e);
+  if (!validConfig.success) {
+    return undefined;
   }
+
+  const { type, keyPrefix } = validConfig.data;
+
+  /**
+   * Used to set a storage value.
+   * @param key
+   * @param value
+   * @example
+   * const { setItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   *
+   * setItem("username", "john_doe");
+   */
+  const setItem = (key: string, value: string) => {
+    const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+
+    switch (type) {
+      case "local-storage":
+        setLocalStorageItem(storageKey, value);
+        break;
+      case "session-storage":
+        setSessionStorageItem(storageKey, value);
+        break;
+      case "cookies":
+        const { cookieOptions } = validConfig.data;
+
+        setCookie(storageKey, value, cookieOptions);
+
+        document.cookie = `${storageKey}=${value}; path=/`;
+        break;
+    }
+  };
+
+  /**
+   * Used to set a value only if it does not already exist.
+   * @param key
+   * @param value
+   * @example
+   * const { setItemIfNotSet } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   *
+   * setItemIfNotSet("username", "john_doe"); // Only sets if "username" is not already set
+   */
+  const setItemIfNotSet = (key: string, value: string) => {
+    const existingValue = getItem(key);
+
+    if (existingValue === undefined) {
+      setItem(key, value);
+    }
+  };
+
+  /**
+   *
+   * @param key
+   * @returns
+   * @example
+   * const { getItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   *
+   * const username = getItem("username");
+   */
+  const getItem = (key: string): string | undefined => {
+    const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+    switch (type) {
+      case "local-storage":
+        return getLocalStorageItem(storageKey) ?? undefined;
+      case "session-storage":
+        return getSessionStorageItem(storageKey);
+      case "cookies":
+        return getCookie(storageKey);
+      default:
+        return undefined;
+    }
+  };
+
+  /**
+   *
+   * @param key
+   * @example
+   * const { removeItem } = useBrowserStorage({ type: "local-storage", keyPrefix: "myApp" });
+   *
+   * removeItem("username"); // Removes the item associated with "myApp_username" from localStorage
+   */
+  const removeItem = (key: string) => {
+    const storageKey = makeOptionallyPrefixedKey(key, keyPrefix);
+    switch (type) {
+      case "local-storage":
+        removeLocalStorageItem(storageKey);
+        break;
+      case "session-storage":
+        removeSessionStorageItem(storageKey);
+        break;
+      case "cookies":
+        removeCookie(storageKey);
+        break;
+    }
+  };
+
+  return { getItem, removeItem, setItem, setItemIfNotSet };
 }
