@@ -13,7 +13,7 @@ import { setCookie, getCookie, removeCookie } from "../cookies/operations";
 import {
   browserStorageConfigSchema,
   type BrowserStorageConfiguration,
-} from "../configuration/schema";
+} from "./configuration/schema";
 
 export interface BrowserStorage {
   getItem: (key: string) => string | undefined;
