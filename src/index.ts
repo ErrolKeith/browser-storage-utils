@@ -10,7 +10,8 @@ import {
   setSessionStorageItem,
 } from "./lib/session-storage/operations";
 import { getCookie, removeCookie, setCookie } from "./lib/cookies/operations";
-import { useBrowserStorage, type BrowserStorage } from "./lib/composable/useBrowserStorage";
+import { useBrowserStorage } from "./lib/composable/useBrowserStorage";
+import type { BrowserStorage } from "./lib/composable/useBrowserStorage";
 
 export {
   getCookie,
