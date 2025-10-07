@@ -5,11 +5,11 @@ import {
   sessionStorageConfigSchema,
   cookieConfigSchema,
 } from "./schema";
-
+const keyPrefix = "testAppName";
 it("can validate local storage config", () => {
   const validLocalStorageConfig = {
     type: "local-storage",
-    options: { keyPrefix: "myApp" },
+    options: { keyPrefix },
   };
 
   expect(() =>
@@ -30,7 +30,7 @@ it("can validate local storage config", () => {
 it("can validate session storage config", () => {
   const validSessionStorageConfig = {
     type: "session-storage",
-    options: { keyPrefix: "myApp" },
+    options: { keyPrefix },
   };
 
   expect(() =>
