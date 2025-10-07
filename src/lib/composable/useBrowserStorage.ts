@@ -1,20 +1,26 @@
-import { makeOptionallyPrefixedKey } from "./lib/storage-key/key";
+import { makeOptionallyPrefixedKey } from "../storage-key/key";
 import {
   getLocalStorageItem,
   setLocalStorageItem,
   removeLocalStorageItem,
-} from "./lib/local-storage/operations";
+} from "../local-storage/operations";
 import {
   getSessionStorageItem,
   setSessionStorageItem,
   removeSessionStorageItem,
-} from "./lib/session-storage/operations";
-import { setCookie, getCookie, removeCookie } from "./lib/cookies/operations";
+} from "../session-storage/operations";
+import { setCookie, getCookie, removeCookie } from "../cookies/operations";
 import {
   browserStorageConfigSchema,
   type BrowserStorageConfiguration,
-} from "./lib/configuration/schema";
-import type { BrowserStorage } from "./types";
+} from "../configuration/schema";
+
+export interface BrowserStorage {
+  getItem: (key: string) => string | undefined;
+  removeItem: (key: string) => void;
+  setItem: (key: string, value: string) => void;
+  setItemIfNotSet: (key: string, value: string) => void;
+}
 
 /**
  * A Composable function to interact with browser storage mechanisms: localStorage, sessionStorage,

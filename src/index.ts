@@ -1,4 +1,3 @@
-import { useBrowserStorage } from "./useBrowserStorage";
 import { makeOptionallyPrefixedKey } from "./lib/storage-key/key";
 import {
   getLocalStorageItem,
@@ -11,7 +10,7 @@ import {
   setSessionStorageItem,
 } from "./lib/session-storage/operations";
 import { getCookie, removeCookie, setCookie } from "./lib/cookies/operations";
-import type { BrowserStorage } from "./types";
+import { useBrowserStorage, type BrowserStorage } from "./lib/composable/useBrowserStorage";
 
 export {
   getCookie,
