@@ -12,6 +12,15 @@ import {
 import { getCookie, removeCookie, setCookie } from "./lib/cookies/operations";
 import { useBrowserStorage } from "./lib/composable/useBrowserStorage";
 import type { BrowserStorage } from "./lib/composable/useBrowserStorage";
+import type {
+  BrowserStorageConfiguration,
+  CookieStorageOptions,
+  CookiesConfiguration,
+  LocalStorageConfiguration,
+  LocalStorageOptions,
+  SessionStorageConfiguration,
+  SessionStorageOptions,
+} from "./lib/composable/configuration/schema";
 
 export {
   getCookie,
@@ -26,4 +35,13 @@ export {
   setSessionStorageItem,
   useBrowserStorage,
 };
-export type { BrowserStorage };
+export type {
+  BrowserStorage,
+  BrowserStorageConfiguration,
+  CookieStorageOptions,
+  CookiesConfiguration,
+  LocalStorageConfiguration,
+  LocalStorageOptions,
+  SessionStorageConfiguration,
+  SessionStorageOptions,
+};
