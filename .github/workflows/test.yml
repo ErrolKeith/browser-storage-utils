@@ -1,0 +1,20 @@
+name: Test
+on:
+  workflow_dispatch:
+
+jobs:
+  unitTests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v5
+      - name: Configure Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - name: Install Dependencies
+        run: |
+          yarn --immutable
+      - name: Unit Tests
+        run: |
+          yarn test
