@@ -3,7 +3,7 @@
  * @param key 
  * @param value 
  */
-const setLocalStorageItem = (key: string, value: string) => {
+export const setLocalStorageItem = (key: string, value: string) => {
   window.localStorage.setItem(key, value);
 };
 
@@ -12,7 +12,7 @@ const setLocalStorageItem = (key: string, value: string) => {
  * @param key
  * @returns 
  */
-const getLocalStorageItem = (key: string): string | null => {
+export const getLocalStorageItem = (key: string): string | null => {
   return window.localStorage.getItem(key);
 };
 
@@ -20,8 +20,6 @@ const getLocalStorageItem = (key: string): string | null => {
  * Removes an item from local storage
  * @param key 
  */
-const removeLocalStorageItem = (key: string) => {
+export const removeLocalStorageItem = (key: string) => {
   window.localStorage.removeItem(key);
 };
-
-export { setLocalStorageItem, getLocalStorageItem, removeLocalStorageItem };

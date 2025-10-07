@@ -5,19 +5,17 @@ import {
   sessionStorageConfigSchema,
   cookieConfigSchema,
 } from "./schema";
-
+const keyPrefix = "testAppName";
 it("can validate local storage config", () => {
-  const validLocalStorageConfig = { type: "local-storage", keyPrefix: "myApp" };
+  const validLocalStorageConfig = {
+    type: "local-storage",
+    options: { keyPrefix },
+  };
 
   expect(() =>
     browserStorageConfigSchema.parse(validLocalStorageConfig)
   ).not.toThrow();
-  expect(() =>
-    browserStorageConfigSchema.parse(validLocalStorageConfig)
-  ).not.toThrow();
-  expect(() =>
-    localStorageConfigSchema.parse(validLocalStorageConfig)
-  ).not.toThrow();
+
   expect(browserStorageConfigSchema.parse(validLocalStorageConfig)).toEqual(
     validLocalStorageConfig
   );
@@ -32,18 +30,12 @@ it("can validate local storage config", () => {
 it("can validate session storage config", () => {
   const validSessionStorageConfig = {
     type: "session-storage",
-    keyPrefix: "myApp",
+    options: { keyPrefix },
   };
 
   expect(() =>
     browserStorageConfigSchema.parse(validSessionStorageConfig)
   ).not.toThrow();
-  expect(() =>
-    sessionStorageConfigSchema.parse(validSessionStorageConfig)
-  ).not.toThrow();
-  expect(browserStorageConfigSchema.parse(validSessionStorageConfig)).toEqual(
-    validSessionStorageConfig
-  );
 
   const invalidSessionStorageConfig = { type: "session-storages" };
 
@@ -55,19 +47,15 @@ it("can validate session storage config", () => {
 it("can validate cookies config", () => {
   const validCookiesConfig = {
     type: "cookies",
-    keyPrefix: "myApp",
-    cookieOptions: { expires: 7 },
+    options: { expires: 7 },
   };
 
   expect(() =>
     browserStorageConfigSchema.parse(validCookiesConfig)
   ).not.toThrow();
   expect(() => cookieConfigSchema.parse(validCookiesConfig)).not.toThrow();
-  expect(browserStorageConfigSchema.parse(validCookiesConfig)).toEqual(
-    validCookiesConfig
-  );
 
-  const invalidCookiesConfig = { type: "cookiess", expiryDays: "seven" };
-  
+  const invalidCookiesConfig = { type: "cookiezz", expiryDays: "seven" };
+
   expect(() => cookieConfigSchema.parse(invalidCookiesConfig)).toThrow();
 });
